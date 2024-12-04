@@ -28,6 +28,18 @@ class Client:
         received_data = data.decode('utf-8')
         return received_data
 
+
+
+    def rdt_send(self):
+        pass
+
+    def make_packet(self):
+        pass
+
+    
+
+    
+
     def close(self):
         """
         关闭客户端套接字
