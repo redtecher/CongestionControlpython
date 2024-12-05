@@ -28,8 +28,6 @@ class Client:
         received_data = data.decode('utf-8')
         return received_data
 
-
-
     def rdt_send(self):
         pass
 
