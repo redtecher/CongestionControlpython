@@ -3,16 +3,20 @@ class Packet:
     # 构造器初始化包
     def __init__(self):
         self.seqNo = 1
+        self.ACKnum = 0
         self.checksum = 0
-        self.content = ""
+        self.payload = ""
     
     #这个方法教给发送者调用，可以将读取的信息封装到 packet当中
-    def createPacket():
-        pass
+    def createPacket(self,input_Content,input_seqNo):
+        self.payload = input_Content
+        self.seqNo = input_seqNo
+        self.checksum = self.generateChecksum(self.payload)     
+        return True                                
 
     # 帮助发送者生成统一格式的信息
-    def generateMessage():
-        pass
+    def generateMessage(self):
+        return self.seqNo+""+self.checksum+""+self.payload;
 
     #生成检验和的函数，原本算法就是将前面3个16位相加，但是这里没有源端口和目的端口
     #因此，我们对发送的信息做一个处理，将其转换为ascii码作为检验和
