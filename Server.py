@@ -21,7 +21,7 @@ class Server:
         """
         data, client_address = self.socket.recvfrom(1024)
         received_data = data.decode('utf-8')
-        return received_data, client_address
+        return received_data, client_address  
 
     def send_response(self, client_address, message):
         """
