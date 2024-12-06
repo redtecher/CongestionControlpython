@@ -40,10 +40,11 @@ class Server:
 
 if __name__ == '__main__':
     parser = optparse.OptionParser()
-    parser.add_option('--ip', dest='ip', default='')
+    parser.add_option('--ip', dest='ip', default='127.0.0.1')
     parser.add_option('--port', dest='port', type='int', default=8888)
     (options, args) = parser.parse_args()
     server = Server(host=options.ip,port=options.port)
     rec_data = server.receive_data()
-    print(rec_data)
+    print(str(rec_data[1]))
+    server.send_response(client_address=rec_data[1],message="I have receive the data")
     server.close()
