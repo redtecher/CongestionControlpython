@@ -1,4 +1,6 @@
+# -*- coding: UTF-8 -*-
 import socket
+import optparse
 
 
 class Client:
@@ -45,6 +47,11 @@ class Client:
         self.socket.close()
 
 if __name__ == '__main__':
-    client = Client()
-    client.send_data("good to see you")
+    parser = optparse.OptionParser()
+    parser.add_option('--ip', dest='ip', default='127.0.0.1')
+    parser.add_option('--port', dest='port', type='int', default=8888)
+    parser.add_option('--msg', dest='msg')
+    (options, args) = parser.parse_args()
+    client = Client(host=options.ip,port=options.port)
+    client.send_data(options.msg)
     client.close()

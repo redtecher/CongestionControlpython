@@ -1,4 +1,6 @@
+# -*- coding: UTF-8 -*-
 import socket
+import optparse
 class Server:
     def __init__(self, host='127.0.0.1', port=8888):
         """
@@ -37,7 +39,11 @@ class Server:
 
 
 if __name__ == '__main__':
-    server = Server()
+    parser = optparse.OptionParser()
+    parser.add_option('--ip', dest='ip', default='')
+    parser.add_option('--port', dest='port', type='int', default=8888)
+    (options, args) = parser.parse_args()
+    server = Server(host=options.ip,port=options.port)
     rec_data = server.receive_data()
     print(rec_data)
     server.close()
