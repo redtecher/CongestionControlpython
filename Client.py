@@ -26,6 +26,13 @@ class Client:
         received_data = data.decode('utf-8')
         return received_data
 
+    def read_file(self,filename):
+        # 打开文件
+        with open(filename, 'r') as file:
+            # 读取文件内容
+            content = file.read()
+            return content
+
     def rdt_send(self):
         pass
 
