@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import socket
 import optparse
+import Packet
 class Server:
     def __init__(self, host='127.0.0.1', port=8888):
         self.host = host
@@ -34,6 +35,8 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
     server = Server(host=options.ip,port=options.port)
     rec_data = server.receive_data()
-    print(str(rec_data[1]))
+    packet = Packet.Packet()
+    packet.parseMessage(rec_data[0])
+    print(packet.payload)
     server.send_response(client_address=rec_data[1],message="I have receive the data")
     server.close()
