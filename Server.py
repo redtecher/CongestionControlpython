@@ -12,7 +12,7 @@ class Server:
 
     def receive_data(self):
         data, client_address = self.socket.recvfrom(1024)
-        received_data = data.decode('utf-8')
+        received_data = data.decode('utf-8','ignore')
         return received_data, client_address  
 
     def send_response(self, client_address, message):
@@ -22,11 +22,28 @@ class Server:
         :param message: 要发送的响应消息（字符串）
         """
         self.socket.sendto(message.encode('utf-8'), client_address)
-        
-    def close(self):
-        
-        self.socket.close()
 
+    def receive_file(self):
+        payload_content = ""
+        while(payload_content!="ENDOFALL"):
+            rec_data = self.receive_data()
+            
+            packet = Packet.Packet()
+            packet.parseMessage(rec_data[0])
+            print('receive the packet'+str(packet.seqNo))
+            payload_content = packet.payload
+            print(payload_content)
+            server.send_response(client_address=rec_data[1],message="I have receive the data:"+str(packet.seqNo))
+    
+    def send_ACK(self,receive_packet:Packet.Packet):
+        send_packet = Packet.Packet()
+        ACK_num = receive_packet.ACKnum
+        send_packet.createPacket("ACK"+str(receive_packet.ACKnum),ACK_num)
+
+        
+
+    def close(self):
+        self.socket.close()
 
 if __name__ == '__main__':
     parser = optparse.OptionParser()
@@ -34,9 +51,5 @@ if __name__ == '__main__':
     parser.add_option('--port', dest='port', type='int', default=8888)
     (options, args) = parser.parse_args()
     server = Server(host=options.ip,port=options.port)
-    rec_data = server.receive_data()
-    packet = Packet.Packet()
-    packet.parseMessage(rec_data[0])
-    print(packet.payload)
-    server.send_response(client_address=rec_data[1],message="I have receive the data")
+    server.receive_file()
     server.close()

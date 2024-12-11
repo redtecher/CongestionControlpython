@@ -5,15 +5,15 @@ class Packet:
 
     # 构造器初始化包
     def __init__(self):
-        self.seqNo = 1  #包序号
-        self.ACKnum = 0  #确认号
-        self.checksum = 0 #检验和
+        self.seqNo = 1  #包序号  
+        self.ACKnum = 0  #确认号   0-收到包有误  1-收到包成功
+        self.checksum = 0 #检验和  
         self.payload = ""  #负载
     
     def __str__(self):
 
         # 包序列格式Packet: seqNo=1, ACKnum=0, checksum=0, payload=0
-        return f"Packet: seqNo={self.seqNo}, ACKnum={self.ACKnum}, checksum={self.checksum}, payload={self.payload}"
+        return f"Pac+ket: seqNo={self.seqNo}, ACKnum={self.ACKnum}, checksum={self.checksum}, payload={self.payload}"
 
     def createPacket(self,input_Content,input_seqNo):
         self.payload = input_Content

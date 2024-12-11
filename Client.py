@@ -28,23 +28,27 @@ class Client:
 
     def read_file(self,filename):
         # 打开文件
-        with open(filename, 'r') as file:
+        encoding='utf-8'
+        with open(filename, 'r',encoding=encoding,errors='replace') as file:
             # 读取文件内容
             content = file.read()
             return content
 
-    def startsender(self):   
+    def startsender(self,filename):   
         #发送核心逻辑
-        # self.read_file('')     
-        packet = self.make_packet(options.msg)
-        self.send_data(packet=packet.generateMessage())
-        rec_data = self.receive_response()
-        print(rec_data)
+        # self.read_file('')
+        content = client.read_file(filename)
+        splited = content.split("\n\n")
+        for i in range(len(splited)):     
+            packet = self.make_packet(splited[i],i+1)
+            self.send_data(packet=packet.generateMessage())
+            rec_data = self.receive_response()
+            print(rec_data)
 
-    def make_packet(self,msg):
+    def make_packet(self,msg,seqno):
         #根据msg生成包
         packet = Packet.Packet()
-        packet.createPacket(msg,1)
+        packet.createPacket(msg,seqno)
         print(packet)
         return packet
         
@@ -67,7 +71,8 @@ if __name__ == '__main__':
     parser.add_option('--ip', dest='ip', default='127.0.0.1')
     parser.add_option('--port', dest='port', type='int', default=8888)
     parser.add_option('--msg', dest='msg')
+    parser.add_option('--file',dest='file')
     (options, args) = parser.parse_args()
     client = Client(host=options.ip,port=options.port)
-    client.startsender()
+    client.startsender("in.txt")
     client.close()
