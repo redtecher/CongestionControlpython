@@ -29,7 +29,8 @@ class Client:
     def read_file(self,filename):
         # 打开文件
         encoding='utf-8'
-        with open(filename, 'r',encoding=encoding,errors='replace') as file:
+        # with open(filename, 'r',encoding=encoding,errors='replace') as file:
+        with open(filename, 'r',encoding=encoding) as file:
             # 读取文件内容
             content = file.read()
             return content
@@ -49,7 +50,6 @@ class Client:
         #根据msg生成包
         packet = Packet.Packet()
         packet.createPacket(msg,seqno)
-        print(packet)
         return packet
         
     def validateACK(seqNo,ACKfromNetwork):

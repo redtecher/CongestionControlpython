@@ -16,24 +16,23 @@ class Server:
         return received_data, client_address  
 
     def send_response(self, client_address, message):
-        """
-        向客户端发送响应消息
-        :param client_address: 客户端地址
-        :param message: 要发送的响应消息（字符串）
-        """
+        
         self.socket.sendto(message.encode('utf-8'), client_address)
 
     def receive_file(self):
         payload_content = ""
         while(payload_content!="ENDOFALL"):
             rec_data = self.receive_data()
-            
+            print(rec_data)
             packet = Packet.Packet()
             packet.parseMessage(rec_data[0])
             print('receive the packet'+str(packet.seqNo))
             payload_content = packet.payload
-            print(payload_content)
-            server.send_response(client_address=rec_data[1],message="I have receive the data:"+str(packet.seqNo))
+            # print(payload_content)
+            if(packet.validateMessage()):
+                server.send_response(client_address=rec_data[1],message="I have receive the data:"+str(packet.seqNo))
+            else:
+                print("error")
     
     def send_ACK(self,receive_packet:Packet.Packet):
         send_packet = Packet.Packet()

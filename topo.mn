@@ -32,8 +32,8 @@
                 "nodeNum": 1,
                 "sched": "host"
             },
-            "x": "127.0",
-            "y": "56.0"
+            "x": "136.0",
+            "y": "76.0"
         },
         {
             "number": "2",
@@ -42,8 +42,8 @@
                 "nodeNum": 2,
                 "sched": "host"
             },
-            "x": "129.0",
-            "y": "534.0"
+            "x": "139.0",
+            "y": "495.0"
         },
         {
             "number": "3",
@@ -52,8 +52,8 @@
                 "nodeNum": 3,
                 "sched": "host"
             },
-            "x": "832.0",
-            "y": "64.0"
+            "x": "813.0",
+            "y": "71.0"
         },
         {
             "number": "4",
@@ -62,8 +62,8 @@
                 "nodeNum": 4,
                 "sched": "host"
             },
-            "x": "821.0",
-            "y": "531.0"
+            "x": "824.0",
+            "y": "499.0"
         }
     ],
     "links": [
@@ -71,6 +71,21 @@
             "dest": "s1",
             "opts": {},
             "src": "h1"
+        },
+        {
+            "dest": "s2",
+            "opts": {},
+            "src": "h2"
+        },
+        {
+            "dest": "s3",
+            "opts": {},
+            "src": "h3"
+        },
+        {
+            "dest": "s4",
+            "opts": {},
+            "src": "h4"
         },
         {
             "dest": "r6",
@@ -83,49 +98,34 @@
             "src": "r6"
         },
         {
-            "dest": "h2",
-            "opts": {},
-            "src": "s2"
-        },
-        {
             "dest": "r7",
             "opts": {},
             "src": "s2"
         },
         {
-            "dest": "s4",
+            "dest": "r5",
             "opts": {},
-            "src": "r7"
-        },
-        {
-            "dest": "h4",
-            "opts": {},
-            "src": "s4"
-        },
-        {
-            "dest": "r8",
-            "opts": {},
-            "src": "s4"
+            "src": "s1"
         },
         {
             "dest": "s3",
             "opts": {},
-            "src": "r8"
-        },
-        {
-            "dest": "r5",
-            "opts": {},
-            "src": "s3"
-        },
-        {
-            "dest": "s1",
-            "opts": {},
             "src": "r5"
         },
         {
-            "dest": "h3",
+            "dest": "r8",
             "opts": {},
             "src": "s3"
+        },
+        {
+            "dest": "s4",
+            "opts": {},
+            "src": "r8"
+        },
+        {
+            "dest": "r7",
+            "opts": {},
+            "src": "s4"
         }
     ],
     "switches": [
@@ -137,8 +137,8 @@
                 "nodeNum": 1,
                 "switchType": "legacySwitch"
             },
-            "x": "283.0",
-            "y": "132.0"
+            "x": "288.0",
+            "y": "133.0"
         },
         {
             "number": "2",
@@ -149,7 +149,7 @@
                 "switchType": "legacySwitch"
             },
             "x": "275.0",
-            "y": "465.0"
+            "y": "441.0"
         },
         {
             "number": "3",
@@ -159,8 +159,8 @@
                 "nodeNum": 3,
                 "switchType": "legacySwitch"
             },
-            "x": "682.0",
-            "y": "131.0"
+            "x": "689.0",
+            "y": "130.0"
         },
         {
             "number": "4",
@@ -170,8 +170,8 @@
                 "nodeNum": 4,
                 "switchType": "legacySwitch"
             },
-            "x": "681.0",
-            "y": "456.0"
+            "x": "693.0",
+            "y": "449.0"
         },
         {
             "number": "5",
@@ -180,8 +180,8 @@
                 "nodeNum": 5,
                 "switchType": "legacyRouter"
             },
-            "x": "484.0",
-            "y": "130.0"
+            "x": "497.0",
+            "y": "133.0"
         },
         {
             "number": "6",
@@ -190,8 +190,8 @@
                 "nodeNum": 6,
                 "switchType": "legacyRouter"
             },
-            "x": "272.0",
-            "y": "286.0"
+            "x": "285.0",
+            "y": "264.0"
         },
         {
             "number": "7",
@@ -200,8 +200,8 @@
                 "nodeNum": 7,
                 "switchType": "legacyRouter"
             },
-            "x": "489.0",
-            "y": "464.0"
+            "x": "484.0",
+            "y": "448.0"
         },
         {
             "number": "8",
@@ -210,8 +210,8 @@
                 "nodeNum": 8,
                 "switchType": "legacyRouter"
             },
-            "x": "699.0",
-            "y": "290.0"
+            "x": "693.0",
+            "y": "281.0"
         }
     ],
     "version": "2"

@@ -13,7 +13,7 @@ class Packet:
     def __str__(self):
 
         # 包序列格式Packet: seqNo=1, ACKnum=0, checksum=0, payload=0
-        return f"Pac+ket: seqNo={self.seqNo}, ACKnum={self.ACKnum}, checksum={self.checksum}, payload={self.payload}"
+        return f"Packet: seqNo={self.seqNo}, ACKnum={self.ACKnum}, checksum={self.checksum}, payload={self.payload}"
 
     def createPacket(self,input_Content,input_seqNo):
         self.payload = input_Content
@@ -29,9 +29,11 @@ class Packet:
     #因此，我们对发送的信息做一个处理，将其转换为ascii码作为检验和
     def generateChecksum(self,s):
         sum = 0
+        # print(s)
         for i in range(0,len(s)):
             asciiInt  = ord(s[i])
             sum = sum+asciiInt
+        # print('\n')
         return sum
     
     def onACK(self):
@@ -48,17 +50,18 @@ class Packet:
         pattern_checksum =r'checksum=(\d+)'
         pattern_payload = r'payload=(.+)'
         if(re.findall(pattern_seqNo,pContent)!=[]):
-            self.seqNo =re.findall(pattern_seqNo,pContent)[0]
+            self.seqNo =int(re.findall(pattern_seqNo,pContent)[0])
+
         else:
             print("seqNo is not matching in re")
 
         if(re.findall(pattern_ACKnum,pContent)!=[]):
-            self.ACKnum = re.findall(pattern_ACKnum,pContent)[0]
+            self.ACKnum = int(re.findall(pattern_ACKnum,pContent)[0])
         else:
             print("ACKnum is not matching in re")
 
         if(re.findall(pattern_checksum,pContent)!=[]):
-            self.checksum =  re.findall(pattern_checksum,pContent)[0]
+            self.checksum =  int(re.findall(pattern_checksum,pContent)[0])
         else:
             print("checksum is not matching in re")
 
@@ -66,7 +69,6 @@ class Packet:
             self.payload = re.findall(pattern_payload,pContent)[0]
         else:
             print("payload is not matching in re")
-
         return True
 
 
@@ -80,7 +82,9 @@ class Packet:
         validate_sum = 0
         for i in range(0,len(self.payload)):
             asciiInt  = ord(self.payload[i])
+            # print(ord(self.payload[i]),end=' ')
             validate_sum = validate_sum+asciiInt
+        
         if validate_sum == self.checksum:
             return True
         else:
