@@ -22,13 +22,14 @@ logger.addHandler(handler)
 def server_run(threadName,host):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
     # print(f"【%s线程开始】{threadName}"%host.name)
-    logger.info("python3 Server.py --ip %s"%host.IP())
-    logger.info(host.cmd('python3 Server.py --ip %s' % host.IP()))
+    record =host.cmd('python3 Server.py --ip %s' % host.IP())
+    print(record)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
 
 def client_run(threadName,host,ip):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
-    logger.info(host.cmd('python3 Client.py --ip %s --msg "hello world"' % ip))
+    record1=host.cmd('python3 Client.py --ip %s --msg "hello world"' % ip)
+    print(record1)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
 
 def myNetwork():
@@ -42,6 +43,7 @@ def myNetwork():
     s1 = net.addSwitch('s1', cls=OVSKernelSwitch, failMode='standalone')
     r2 = net.addHost('r2', cls=Node, ip='0.0.0.0')
     r2.cmd('sysctl -w net.ipv4.ip_forward=1')
+    r2.cmd('sysctl -w net.ipv4.route.flush=1')
     s3 = net.addSwitch('s3', cls=OVSKernelSwitch, failMode='standalone')
 
     info( '*** Add hosts\n')
@@ -51,12 +53,12 @@ def myNetwork():
     h4 = net.addHost('h4', cls=Host, ip='192.168.2.3', defaultRoute=None)
 
     info( '*** Add links\n')
-    net.addLink(h1, s1,bw=10, delay='10ms', max_queue_size=50, loss=10, use_htb=True)
-    net.addLink(s1, h2,bw=10, delay='10ms', max_queue_size=50, loss=10, use_htb=True)
-    net.addLink(h3, s3,bw=10, delay='10ms', max_queue_size=50, loss=10, use_htb=True)
-    net.addLink(s3, h4,bw=10, delay='10ms', max_queue_size=50, loss=10, use_htb=True)
-    net.addLink(s1, r2,bw=10, delay='10ms', max_queue_size=50, loss=10, use_htb=True)
-    net.addLink(r2, s3,bw=10, delay='10ms', max_queue_size=50, loss=10, use_htb=True)
+    net.addLink(h1, s1,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
+    net.addLink(s1, h2,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
+    net.addLink(h3, s3,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
+    net.addLink(s3, h4,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
+    net.addLink(s1, r2,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
+    net.addLink(r2, s3,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
 
     info( '*** Starting network\n')
     net.build()

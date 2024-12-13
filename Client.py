@@ -2,7 +2,14 @@
 import socket
 import optparse
 import Packet
-
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(level = logging.INFO)
+handler = logging.FileHandler("log.txt")
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
 
 class Client:
     def __init__(self, host='127.0.0.1', port=8888):
@@ -13,7 +20,7 @@ class Client:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        
+        self.socket.settimeout(4)
 
     def send_data(self, packet):
         #发送数据
@@ -35,16 +42,25 @@ class Client:
             content = file.read()
             return content
 
+
+    def send_packet(self,packet,app_msg,seqno):
+        try:
+            packet = self.make_packet(app_msg,seqno)
+            self.send_data(packet=packet.generateMessage())
+            rec_data = self.receive_response()
+            logger.info("receive:"+rec_data)
+        except Exception as e:
+            logger.info('%d socket timeout! Resend!' % seqno)
+            self.send_packet(packet,app_msg,seqno)
+
     def startsender(self,filename):   
         #发送核心逻辑
         # self.read_file('')
         content = client.read_file(filename)
         splited = content.split("\n\n")
-        for i in range(len(splited)):     
-            packet = self.make_packet(splited[i],i+1)
-            self.send_data(packet=packet.generateMessage())
-            rec_data = self.receive_response()
-            print(rec_data)
+        for i in range(len(splited)):
+            packet =Packet.Packet()     
+            self.send_packet(packet,splited[i],i+1)
 
     def make_packet(self,msg,seqno):
         #根据msg生成包
