@@ -3,6 +3,7 @@ import socket
 import optparse
 import Packet
 import logging
+import asyncio
 logger = logging.getLogger(__name__)
 logger.setLevel(level = logging.INFO)
 handler = logging.FileHandler("log.txt")
@@ -15,32 +16,42 @@ class Server:
         self.host = host
         self.port = port
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        self.socket.bind((self.host, self.port))
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.socket.bind((host, port))
+        self.socket.setblocking(False)
         logger.info(f"UDP服务器已启动，正在监听 {self.host}:{self.port}...")
+    
+    def connection_made(self, transport):
+        self.transport = transport
 
-    def receive_data(self):
-        data, client_address = self.socket.recvfrom(1024)
-        received_data = data.decode('utf-8','ignore')
-        return received_data, client_address  
+    async def receive_data(self):
+        loop = asyncio.get_event_loop()
+        data, client_address = await loop.sock_recvfrom(self.socket, 1024)
+        logger.info(f"data: {data}")
+        received_data = data.decode('utf-8', 'ignore')
+        logger.info(f"received_data: {received_data}")
+        return received_data, client_address
 
-    def send_response(self, client_address, message):
-        
-        self.socket.sendto(message.encode('utf-8'), client_address)
+    async def send_response(self, client_address, message):
+        # loop = asyncio.get_event_loop()
+        await self.loop.sock_sendall(self.socket, message.encode('utf-8'))
 
-    def receive_file(self):
+    async def receive_file(self):
         payload_content = ""
-        while(payload_content!="ENDOFALL"):
-            rec_data = self.receive_data()
-            logger.info(rec_data)
-            packet = Packet.Packet()
-            packet.parseMessage(rec_data[0])
-            logger.info('receive the packet'+str(packet.seqNo))
-            payload_content = packet.payload
-            # print(payload_content)
-            if(packet.validateMessage()):
-                server.send_response(client_address=rec_data[1],message="I have receive the data:"+str(packet.seqNo))
-            else:
-                server.send_response(client_address=rec_data[1],message="found error packet")
+        while payload_content != "ENDOFALL":
+            try:
+                rec_data, client_address = await self.receive_data()
+                logger.info(f"Received data from {client_address}: {rec_data}")
+                packet = Packet.Packet()
+                packet.parseMessage(rec_data)
+                logger.info('Received the packet with seqNo: ' + str(packet.seqNo))
+                payload_content = packet.payload
+                if packet.validateMessage():
+                    await self.send_response(client_address=client_address, message="I have received the data:" + str(packet.seqNo))
+                else:
+                    await self.send_response(client_address=client_address, message="Found error in packet")
+            except Exception as e:
+                logger.error(f"Error receiving data: {e}")
     
     def send_ACK(self,receive_packet:Packet.Packet):
         send_packet = Packet.Packet()
@@ -52,11 +63,18 @@ class Server:
     def close(self):
         self.socket.close()
 
-if __name__ == '__main__':
+async def main():
     parser = optparse.OptionParser()
     parser.add_option('--ip', dest='ip', default='127.0.0.1')
     parser.add_option('--port', dest='port', type='int', default=8888)
     (options, args) = parser.parse_args()
-    server = Server(host=options.ip,port=options.port)
-    server.receive_file()
-    server.close()
+    server = Server(host=options.ip, port=options.port)
+    try:
+        await server.receive_file()
+    except Exception as e:
+        logger.error(f"Error in server operation: {e}")
+    finally:
+        server.close()
+
+if __name__ == '__main__':
+    asyncio.run(main())

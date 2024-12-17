@@ -22,15 +22,21 @@ logger.addHandler(handler)
 def server_run(threadName,host):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
     # print(f"【%s线程开始】{threadName}"%host.name)
-    record =host.cmd('python3 Server.py --ip %s' % host.IP())
+    record =host.cmd('python3 UDPServer.py --ip %s' % host.IP())
     print(record)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
 
 def client_run(threadName,host,ip):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
-    record1=host.cmd('python3 Client.py --ip %s --msg "hello world"' % ip)
+    record1=host.cmd('python3 UDPClient.py --ip %s --msg "hello world"' % ip)
     print(record1)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
+
+# 禁用拥塞控制
+def disable_congestion_control(net):
+    for host in net.hosts:
+        host.cmd('sysctl -w net.ipv4.tcp_congestion_control=none')
+
 
 def myNetwork():
 
@@ -53,15 +59,17 @@ def myNetwork():
     h4 = net.addHost('h4', cls=Host, ip='192.168.2.3', defaultRoute=None)
 
     info( '*** Add links\n')
-    net.addLink(h1, s1,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
-    net.addLink(s1, h2,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
-    net.addLink(h3, s3,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
-    net.addLink(s3, h4,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
-    net.addLink(s1, r2,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
-    net.addLink(r2, s3,delay="5ms", max_queue_size=100,bw=100, cls=TCLink,loss=0)
-
+    net.addLink(h1, s1,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    net.addLink(s1, h2,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    net.addLink(h3, s3,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    net.addLink(s3, h4,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    net.addLink(s1, r2,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    net.addLink(r2, s3,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    
     info( '*** Starting network\n')
     net.build()
+
+    disable_congestion_control(net)
     info( '*** Starting controllers\n')
     for controller in net.controllers:
         controller.start()
