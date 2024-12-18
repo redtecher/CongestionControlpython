@@ -9,6 +9,8 @@ from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 from mininet.link import TCLink, Intf
 from subprocess import call
+from data_analyse import Data_Analyse
+import optparse
 import threading
 import time
 import logging
@@ -19,6 +21,12 @@ handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
+parser = optparse.OptionParser()
+parser.add_option('--sr', dest='send_rate', type='int',default='50') 
+# parser.add_option()
+(options, args) = parser.parse_args()
+
+
 def server_run(threadName,host):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
     # print(f"【%s线程开始】{threadName}"%host.name)
@@ -26,9 +34,9 @@ def server_run(threadName,host):
     print(record)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
 
-def client_run(threadName,host,ip):
+def client_run(threadName,host,ip,send_rate):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
-    record1=host.cmd('python3 UDPClient.py --ip %s --msg "hello world"' % ip)
+    record1=host.cmd('python3 UDPClient.py --ip %s --sr %s' % (ip,send_rate))
     print(record1)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
 
@@ -39,6 +47,8 @@ def disable_congestion_control(net):
 
 
 def myNetwork():
+    send_rate = []
+    bandwidth =[]
 
     net = Mininet( topo=None,
                    build=False,
@@ -59,12 +69,12 @@ def myNetwork():
     h4 = net.addHost('h4', cls=Host, ip='192.168.2.3', defaultRoute=None)
 
     info( '*** Add links\n')
-    net.addLink(h1, s1,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
-    net.addLink(s1, h2,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
-    net.addLink(h3, s3,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
-    net.addLink(s3, h4,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
-    net.addLink(s1, r2,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
-    net.addLink(r2, s3,delay="10ms", max_queue_size=20,bw=100, cls=TCLink,loss=0)
+    net.addLink(h1, s1,delay="20ms", max_queue_size=5,bw=10, cls=TCLink,loss=0)
+    net.addLink(s1, h2,delay="20ms", max_queue_size=5,bw=10, cls=TCLink,loss=0)
+    net.addLink(h3, s3,delay="20ms", max_queue_size=5,bw=10, cls=TCLink,loss=0)
+    net.addLink(s3, h4,delay="20ms", max_queue_size=5,bw=10, cls=TCLink,loss=0)
+    net.addLink(s1, r2,delay="20ms", max_queue_size=5,bw=10, cls=TCLink,loss=0)
+    net.addLink(r2, s3,delay="20ms", max_queue_size=5,bw=10, cls=TCLink,loss=0)
     
     info( '*** Starting network\n')
     net.build()
@@ -90,36 +100,39 @@ def myNetwork():
     h2.cmd('route add default gw 192.168.1.1')
     h3.cmd('route add default gw 192.168.2.1')
     h4.cmd('route add default gw 192.168.2.1')
-
+    
     threadh2 = threading.Thread(target=server_run,args=("threadh2",h2))
     threadh4 = threading.Thread(target=server_run,args=("threadh4",h4))
-    threadh1 = threading.Thread(target=client_run,args=("threadh1",h1,h4.IP()))
-    threadh3 = threading.Thread(target=client_run,args=("threadh3",h3,h2.IP()))
-
     threadh2.start()
     logger.info("h2 is running")
     threadh4.start()
     logger.info("h4 is running")
-    time.sleep(2)
-    threadh1.start()
-    logger.info("h1 is running")
-    threadh3.start()
-    logger.info("h1 is running")
+    for send_rate in range(100):
+        threadh1 = threading.Thread(target=client_run,args=("threadh1",h1,h4.IP(),send_rate))
+        threadh3 = threading.Thread(target=client_run,args=("threadh3",h3,h2.IP(),send_rate))
+        time.sleep(2)
+        threadh1.start()
+        logger.info("h1 is running")
+        threadh3.start()
+        logger.info("h1 is running")
+        threadh1.join()
+        logger.info("h1 stop")
+        threadh3.join()
+        logger.info("h3 stop")
+
+        # data analyse
+        
+
+
 
     threadh2.join()
     logger.info("h2 stop")
     threadh4.join()
     logger.info("h4 stop")
-    threadh1.join()
-    logger.info("h1 stop")
-    threadh3.join()
-    logger.info("h3 stop")
-    
     CLI(net)
     net.stop()
 
 
 if __name__ == '__main__':
-    
     setLogLevel('info')
     myNetwork()
