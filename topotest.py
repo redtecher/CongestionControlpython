@@ -52,7 +52,7 @@ def myNetwork():
     info( '*** Post configure switches and hosts\n')
 
     CLI(net)
-config h1-eth0 192.168.1.1/24')
+    # config h1-eth0 192.168.1.1/24')
     h2.cmd('ifconfig h1-eth0 192.168.3.1/24')
     r4.cmd('ifconfig r4-eth0 192.168.1.2/24')
     r4.cmd('ifconfig r4-eth1 192.168.2.1/24')

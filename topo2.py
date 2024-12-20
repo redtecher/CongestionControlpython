@@ -33,12 +33,14 @@ def server_run(threadName,host):
     record =host.cmd('python3 UDPServer.py --ip %s' % host.IP())
     print(record)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
+    return record
 
 def client_run(threadName,host,ip,send_rate):
     logger.info(f"【%s线程开始】{threadName}"%host.name)
-    record1=host.cmd('python3 UDPClient.py --ip %s --sr %s' % (ip,send_rate))
+    record1 = host.cmd('python3 UDPClient.py --ip %s --sr %s' % (ip,send_rate))
     print(record1)
     logger.info(f"【%s线程结束】{threadName}"%host.name)
+    return record1
 
 # 禁用拥塞控制
 def disable_congestion_control(net):
@@ -48,7 +50,7 @@ def disable_congestion_control(net):
 
 def myNetwork():
     send_rate = []
-    bandwidth =[]
+    # bandwidth =[]
 
     net = Mininet( topo=None,
                    build=False,
@@ -107,7 +109,7 @@ def myNetwork():
     logger.info("h2 is running")
     threadh4.start()
     logger.info("h4 is running")
-    for send_rate in range(100):
+    for send_rate in range(1,3,1):
         threadh1 = threading.Thread(target=client_run,args=("threadh1",h1,h4.IP(),send_rate))
         threadh3 = threading.Thread(target=client_run,args=("threadh3",h3,h2.IP(),send_rate))
         time.sleep(2)
@@ -119,8 +121,6 @@ def myNetwork():
         logger.info("h1 stop")
         threadh3.join()
         logger.info("h3 stop")
-
-        # data analyse
         
 
 

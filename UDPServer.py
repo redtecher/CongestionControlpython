@@ -16,10 +16,10 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
 
     def datagram_received(self, data, addr):
         message = data.decode()
-        logger.info(f"Received {message} from {addr}")
+        logger.info(f"Received {message} from {addr},data_num :{len(message)}")
+        # receive_message_num = len(message)
         packet = Packet.Packet()
         packet.parseMessage(message)
-        
         newpacket = Packet.Packet()
         newpacket.createPacket("Server ACK",packet.seqNo)
         newpacket.ACKnum = 1

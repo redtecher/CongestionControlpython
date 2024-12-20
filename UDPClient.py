@@ -29,6 +29,7 @@ class UDPClientProtocol(asyncio.DatagramProtocol):
         self.message = message
         self.on_response = on_response
         self.pending_acks = {}
+        # self.pass_byte=0
 
     def make_packet(self,msg,seqno):
         #根据msg生成包
@@ -114,6 +115,4 @@ async def udp_client(host,port,message):
     await asyncio.sleep(TOTAL_TIME)  
 
 if __name__ == "__main__":
-
-    
     asyncio.run(udp_client(host=options.ip,port=options.port,message=options.msg))
