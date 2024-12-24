@@ -1,36 +1,24 @@
-2024-12-20 17:23:38,834 - __main__ - INFO - 【h2线程开始】threadh2
-2024-12-20 17:23:38,834 - __main__ - INFO - h2 is running
-2024-12-20 17:23:38,835 - __main__ - INFO - 【h4线程开始】threadh4
-2024-12-20 17:23:38,836 - __main__ - INFO - h4 is running
-2024-12-20 17:23:40,840 - __main__ - INFO - 【h1线程开始】threadh1
-2024-12-20 17:23:40,841 - __main__ - INFO - h1 is running
-2024-12-20 17:23:40,842 - __main__ - INFO - 【h3线程开始】threadh3
-2024-12-20 17:23:40,842 - __main__ - INFO - h1 is running
-2024-12-20 17:23:50,971 - __main__ - INFO - 【h1线程结束】threadh1
-2024-12-20 17:23:50,972 - __main__ - INFO - h1 stop
-2024-12-20 17:23:50,971 - __main__ - INFO - 【h3线程结束】threadh3
-2024-12-20 17:23:50,972 - __main__ - INFO - h3 stop
-2024-12-20 17:23:52,976 - __main__ - INFO - 【h1线程开始】threadh1
-2024-12-20 17:23:52,977 - __main__ - INFO - h1 is running
-2024-12-20 17:23:52,978 - __main__ - INFO - 【h3线程开始】threadh3
-2024-12-20 17:23:52,979 - __main__ - INFO - h1 is running
-2024-12-20 17:24:03,097 - __main__ - INFO - 【h1线程结束】threadh1
-2024-12-20 17:24:03,098 - __main__ - INFO - h1 stop
-2024-12-20 17:24:03,100 - __main__ - INFO - 【h3线程结束】threadh3
-2024-12-20 17:24:03,100 - __main__ - INFO - h3 stop
-2024-12-20 17:27:23,015 - __main__ - INFO - 【h2线程开始】threadh2
-2024-12-20 17:27:23,015 - __main__ - INFO - h2 is running
-2024-12-20 17:27:23,017 - __main__ - INFO - 【h4线程开始】threadh4
-2024-12-20 17:27:23,017 - __main__ - INFO - h4 is running
-2024-12-20 17:27:25,021 - __main__ - INFO - 【h1线程开始】threadh1
-2024-12-20 17:27:25,021 - __main__ - INFO - h1 is running
-2024-12-20 17:27:25,023 - __main__ - INFO - 【h3线程开始】threadh3
-2024-12-20 17:27:25,024 - __main__ - INFO - h1 is running
-2024-12-20 17:27:35,204 - __main__ - INFO - 【h3线程结束】threadh3
-2024-12-20 17:27:35,208 - __main__ - INFO - 【h1线程结束】threadh1
-2024-12-20 17:27:35,209 - __main__ - INFO - h1 stop
-2024-12-20 17:27:35,209 - __main__ - INFO - h3 stop
-2024-12-20 17:27:37,212 - __main__ - INFO - 【h1线程开始】threadh1
-2024-12-20 17:27:37,213 - __main__ - INFO - h1 is running
-2024-12-20 17:27:37,213 - __main__ - INFO - 【h3线程开始】threadh3
-2024-12-20 17:27:37,214 - __main__ - INFO - h1 is running
+2024-12-23 10:51:33,824 - __main__ - INFO - 【h2线程开始】threadh2
+2024-12-23 10:51:33,824 - __main__ - INFO - h2 is running
+2024-12-23 10:51:33,825 - __main__ - INFO - 【h4线程开始】threadh4
+2024-12-23 10:51:33,825 - __main__ - INFO - h4 is running
+2024-12-23 10:51:33,825 - __main__ - INFO - 【h1线程开始】threadh1
+2024-12-23 10:51:33,826 - __main__ - INFO - h1 is running
+2024-12-23 10:51:33,826 - __main__ - INFO - 【h3线程开始】threadh3
+2024-12-23 10:51:33,826 - __main__ - INFO - h1 is running
+2024-12-24 14:41:37,873 - __main__ - INFO - 【h2线程开始】threadh2
+2024-12-24 14:41:37,874 - __main__ - INFO - h2 is running
+2024-12-24 14:41:37,875 - __main__ - INFO - 【h4线程开始】threadh4
+2024-12-24 14:41:37,875 - __main__ - INFO - h4 is running
+2024-12-24 14:41:37,878 - __main__ - INFO - 【h1线程开始】threadh1
+2024-12-24 14:41:37,880 - __main__ - INFO - h1 is running
+2024-12-24 14:41:37,882 - __main__ - INFO - 【h3线程开始】threadh3
+2024-12-24 14:41:37,883 - __main__ - INFO - h1 is running
+2024-12-24 15:38:47,570 - __main__ - INFO - 【h2线程开始】threadh2
+2024-12-24 15:38:47,571 - __main__ - INFO - h2 is running
+2024-12-24 15:38:47,572 - __main__ - INFO - 【h4线程开始】threadh4
+2024-12-24 15:38:47,573 - __main__ - INFO - h4 is running
+2024-12-24 15:38:47,574 - __main__ - INFO - 【h1线程开始】threadh1
+2024-12-24 15:38:47,574 - __main__ - INFO - h1 is running
+2024-12-24 15:38:47,576 - __main__ - INFO - 【h3线程开始】threadh3
+2024-12-24 15:38:47,579 - __main__ - INFO - h1 is running
