@@ -23,12 +23,11 @@
 
   <h3 align="center">CongestionControl</h3>
   <p align="center">
-    一个"完美的"README模板去快速开始你的项目！
+    一个用mininet复现网络拥塞的项目
     <br />
     <a href="https://github.com/redtecher/CongestionControlpython"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/shaojintian/Best_README_template">查看Demo</a>
     ·
     <a href="https://github.com/redtecher/CongestionControlpython/issues">报告Bug</a>
     ·
@@ -52,70 +51,54 @@
 - [作者](#作者)
 - [鸣谢](#鸣谢)
 
-### 上手指南
-
-请将所有链接中的“shaojintian/Best_README_template”改为“your_github_name/your_repository”
 
 
-
-###### 开发前的配置要求
-
-1. xxxxx x.x.x
-2. xxxxx x.x.x
-
-###### **安装步骤**
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-
-```sh
-git clone https://github.com/shaojintian/Best_README_template.git
-```
 
 ### 文件目录说明
 eg:
 
 ```
 filetree 
-├── ARCHITECTURE.md
-├── LICENSE.txt
-├── README.md
-├── /account/
-├── /bbs/
-├── /docs/
-│  ├── /rules/
-│  │  ├── backend.txt
-│  │  └── frontend.txt
-├── manage.py
-├── /oa/
-├── /static/
-├── /templates/
-├── useless.md
-└── /util/
+├── Client.py                   # 初始用socket实现的Client类
+├── Server.py                   # 初始用socket实现的Server类
+├── LICENSE.txt                 #  LICENSE.txt文件
+├── README.md                   #  Readme文件
+├── CongestionControl.py        # 拥塞控制类
+├── Test.py                     # 测试文件
+├── /images/
+│  ├── 拓扑图.jpg                #死锁复现网络拓扑图
+│  ├── logo.png                 #项目logo
+│  ├── topo2.jpg                #实验拓扑图
+├── data_analyse_conges_data.py #拥塞控制后分析吞吐量并绘制图表
+├── data_analyse_congestion.py  #拥塞控制后分析cnwd并绘制图表
+├── data_analyse.py             #拥塞控制前分析吞吐量并绘制图表 复现拥塞
+├── mininetSocketTest.py        #mininet内使用socket编程测试文件
+├── Packet.py                   #可靠传输协议Packet类的实现
+├── topo_congescontrol.py       #使用了拥塞控制的mininet模拟及运行文件，生成数据
+├── topo_nocontrol.py           #没有拥塞控制下的mininet模拟及运行文件，复现网络拥塞
+├── topo.mn                     #mininet下miniedit生成的拓扑图
+├── topo.py                     #最简单的拓扑模拟
+├── UDPClient.py                #异步并发的客户端实现
+├── UDPServer.py                #异步并发的服务端端实现
+├── data_record.txt             #每10秒记录吞吐率数据
+├── in.txt                      #输入的文章
+├── log.txt                     #记录线程情况
+├── logclient.txt               #客户端发包收包记录
+├── logserver.txt               #客户端接受包及发送包记录
+├── no_cc_data_record.txt       #没有拥塞控制的一次数据记录
+```
+
+### 运行
+
+```
+
+Python3 topo2.py
 
 ```
 
 
 
 
-
-### 开发的架构 
-
-请阅读[ARCHITECTURE.md](https://github.com/shaojintian/Best_README_template/blob/master/ARCHITECTURE.md) 查阅为该项目的架构。
-
-### 部署
-
-暂无
-
-### 使用到的框架
-
-- [xxxxxxx](https://getbootstrap.com)
-- [xxxxxxx](https://jquery.com)
-- [xxxxxxx](https://laravel.com)
-
-### 贡献者
-
-请阅读**CONTRIBUTING.md** 查阅为该项目做出贡献的开发者。
 
 #### 如何参与开源项目
 
@@ -136,25 +119,13 @@ filetree
 
 ### 作者
 
-xxx@xxxx
-
-知乎:xxxx  &ensp; qq:xxxxxx    
-
- *您也可以在贡献者名单中参看所有参与该项目的开发者。*
+洪川/Redtecher 
 
 ### 版权说明
 
 该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt)
 
-### 鸣谢
 
-
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
-- [xxxxxxxxxxxxxx](https://connoratherton.com/loaders)
 
 <!-- links -->
 [your-project-path]:shaojintian/Best_README_template
