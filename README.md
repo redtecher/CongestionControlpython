@@ -86,18 +86,65 @@ filetree
 ├── logclient.txt               #客户端发包收包记录
 ├── logserver.txt               #客户端接受包及发送包记录
 ├── no_cc_data_record.txt       #没有拥塞控制的一次数据记录
+├── congestion_record.txt       #拥塞控制cnwd记录
 ```
+### 搭建的网络拓扑图
+<img src="./images/topo2.jpg">
 
+
+### 依赖
+matplotlib==3.5.1
+mininet==2.3.0
+一键安装
+```
+pip install -r requirements.txt
+```
 ### 运行
-
+1.客户端服务器运行
 ```
-
-Python3 topo2.py
-
+Python3 UDPClient.py  (--ip)(--name)(--port)(--msg)(--file)(--sr)
+├──(--ip)  对端ip地址
+├──(--name) 主机名称传入
+├──(--port) 端口号
+├──(--msg) 发送消息
+├──(--file) 发送文件
+├──(--sr) 发送速率
 ```
+客户端服务器运行
+```
+Python3 UDPServer.py 
+```
+2.未加入拥塞控制前复现网络拥塞现象
+```
+Python3 topo_nocontrol.py
+```
+客户端发送记录记录在logclient.txt
+服务器接收记录记录在logserver.txt
+线程记录在log.txt
+每10秒记录吞吐率数据记录在data_record.txt       
+3.加入拥塞控制后复现网络拥塞现象
+```
+Python3 topo_congescontrol.py
+```
+客户端发送记录记录在logclient.txt
+服务器接收记录记录在logserver.txt
+线程记录在log.txt
+每10秒记录吞吐率数据记录在data_record.txt  
+拥塞窗口记录在congestion_record.txt 
 
-
-
+3.数据分析记录
+①分析no_cc_data_record.txt中的没有拥塞控制状态的吞吐率记录
+```
+Python3 data_analyse.py
+```
+②分析data_record.txt中的有拥塞控制情况的吞吐率记录
+```
+Python3 data_analyse_conges_data.py
+```
+③分析congestion_record.txt中的有拥塞控制情况的吞吐率记录
+```
+Python3 data_analyse_congestion.py
+```
 
 
 #### 如何参与开源项目
