@@ -17,7 +17,7 @@
 <br />
 
 <p align="center">
-  <a href="https://github.com/redtecher/CongestionControlpython/">
+  <a href="https://github.com/redtecher/CongestionControlpython/blob/main/images/logo.png">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -170,22 +170,22 @@ Python3 data_analyse_congestion.py
 
 ### 版权说明
 
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt)
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/redtecher/CongestionControlpython/blob/master/LICENSE.txt)
 
 
 
 <!-- links -->
-[your-project-path]:shaojintian/Best_README_template
-[contributors-shield]: https://img.shields.io/github/contributors/shaojintian/Best_README_template.svg?style=flat-square
-[contributors-url]: https://github.com/shaojintian/Best_README_template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/shaojintian/Best_README_template.svg?style=flat-square
-[forks-url]: https://github.com/shaojintian/Best_README_template/network/members
-[stars-shield]: https://img.shields.io/github/stars/shaojintian/Best_README_template.svg?style=flat-square
-[stars-url]: https://github.com/shaojintian/Best_README_template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/shaojintian/Best_README_template.svg
-[license-shield]: https://img.shields.io/github/license/shaojintian/Best_README_template.svg?style=flat-square
-[license-url]: https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt
+[your-project-path]:redtecher/CongestionControlpython
+[contributors-shield]: https://img.shields.io/github/contributors/redtecher/CongestionControlpython.svg?style=flat-square
+[contributors-url]: https://github.com/redtecher/CongestionControlpython/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/redtecher/CongestionControlpython.svg?style=flat-square
+[forks-url]: https://github.com/redtecher/CongestionControlpython/network/members
+[stars-shield]: https://img.shields.io/github/stars/redtecher/CongestionControlpython.svg?style=flat-square
+[stars-url]: https://github.com/redtecher/CongestionControlpython/stargazers
+[issues-shield]: https://img.shields.io/github/issues/redtecher/CongestionControlpython.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/redtecher/CongestionControlpython.svg
+[license-shield]: https://img.shields.io/github/license/redtecher/CongestionControlpython.svg?style=flat-square
+[license-url]: https://github.com/redtecher/CongestionControlpython/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/shaojintian
 
