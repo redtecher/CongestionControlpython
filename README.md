@@ -186,8 +186,6 @@ Python3 data_analyse_congestion.py
 [issues-url]: https://img.shields.io/github/issues/redtecher/CongestionControlpython.svg
 [license-shield]: https://img.shields.io/github/license/redtecher/CongestionControlpython.svg?style=flat-square
 [license-url]: https://github.com/redtecher/CongestionControlpython/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/shaojintian
 
 
 
