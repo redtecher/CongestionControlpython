@@ -16,8 +16,8 @@
 <br />
 
 <p align="center">
-  <a href="https://github.com/redtecher/CongestionControlpython/blob/main/images/logo.png">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/redtecher/CongestionControlpython">
+    <img src="./images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">CongestionControl</h3>
@@ -88,13 +88,17 @@ filetree
 ├── congestion_record.txt       #拥塞控制cnwd记录
 ```
 ### 搭建的网络拓扑图
-<img src="./images/topo2.jpg">
+<img src="./images/topo2.jpg"></img>
 
 
 ### 依赖
+```
 matplotlib==3.5.1
 mininet==2.3.0
-一键安装
+```
+
+
+<b>一键安装</b>
 ```
 pip install -r requirements.txt
 ```
@@ -145,7 +149,13 @@ Python3 data_analyse_conges_data.py
 Python3 data_analyse_congestion.py
 ```
 
-
+### 实验结果
+1.没有拥塞控制前的$λ_{in}$和$λ_{out}$的关系散点图
+<img src="./images/λin_out.jpg"></img>
+2.加入拥塞控制后的$λ_{in}$和$λ_{out}$的关系散点图
+<img src="./images/λinout_conges.jpg"></img>
+3.加入拥塞控制后的cnwd随着时间的变化图
+<img src="./images/cnwd_times.jpg"></img>
 #### 如何参与开源项目
 
 贡献使开源社区成为一个学习、激励和创造的绝佳场所。你所作的任何贡献都是**非常感谢**的。
